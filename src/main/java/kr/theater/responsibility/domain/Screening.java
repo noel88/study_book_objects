@@ -1,4 +1,4 @@
-package kr.theater.domain;
+package kr.theater.responsibility.domain;
 
 import java.time.LocalDateTime;
 

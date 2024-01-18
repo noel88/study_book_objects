@@ -1,4 +1,7 @@
-package kr.theater.domain;
+package kr.theater.responsibility;
+
+import kr.theater.responsibility.domain.Money;
+import kr.theater.responsibility.domain.Screening;
 
 import java.util.ArrayList;
 import java.util.Arrays;

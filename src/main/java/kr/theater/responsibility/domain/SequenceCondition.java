@@ -1,4 +1,7 @@
-package kr.theater.domain;
+package kr.theater.responsibility.domain;
+
+import kr.theater.responsibility.DiscountCondition;
+import kr.theater.responsibility.domain.Screening;
 
 public class SequenceCondition implements DiscountCondition {
 

@@ -1,4 +1,4 @@
-package kr.theater.domain;
+package kr.theater.responsibility.domain;
 
 public class Reservation {
     private Customer customer;
