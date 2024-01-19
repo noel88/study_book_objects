@@ -1,6 +1,8 @@
 package kr.theater.data;
 
 import kr.theater.data.domain.*;
+import kr.theater.data.domain.DiscountCondition;
+import kr.theater.data.domain.Movie;
 import kr.theater.responsibility.domain.Money;
 
 /**
@@ -20,6 +22,14 @@ public class ReservationAgency {
     public Reservation reservation(Screening screening, Customer customer, int audienceCount) {
 
         //TODO: 변경 전.
+        /**
+         * NOTE: 길이가 너무 길고 이해하기 어려움
+         *  - 어떤 일을 수행하는지 한눈에 파악하기 어렵기 때문에 코드를 전체적으로 이해하는 데 너무 많은 시간이 걸린다.
+         *  - 하나의 메서드 안에서 너무 많은 작업을 처리하기 때문에 변경이 필요할 때 수정해야 할 부분을 찾기 어렵다.
+         *  - 메서드 내부의 일부 로직만 수정하더라도 메서드의 나머지 부분에서 버그가 발생할 확률이 높다.
+         *  - 로직의 일부만 재사용하는 것이 불가능하다
+         *  - 코드를 재사용하는 유일한 방법은 원하는 코드를 복사해서 붙여넣는 것 뿐이므로 코드 중복을 초래하기 쉽다.
+         */
 //        Movie movie = screening.getMovie();
 //
 //        boolean discountable = false;
@@ -55,11 +65,61 @@ public class ReservationAgency {
 //        }
 //        return new Reservation(customer, screening, fee, audienceCount);
 
-
-
         //TODO: 변경 후
         Money fee = screening.calculateFee(audienceCount);
         return new Reservation(customer, screening, fee, audienceCount);
     }
+
+    public Reservation reserve(Screening screening, Customer customer, int audienceCount) {
+        boolean discountable = checkDiscountable(screening);
+        Money fee = calculateFee(screening, discountable, audienceCount);
+        return createReservation(screening, customer, audienceCount, fee);
+    }
+
+    private Reservation createReservation(Screening screening, Customer customer, int audienceCount, Money fee) {
+        return new Reservation(customer, screening, fee, audienceCount);
+    }
+
+    private Money calculateFee(Screening screening, boolean discountable, int audienceCount) {
+        if (discountable) {
+            return screening.getMovie().getFee()
+                    .minus(calculateDiscountedFee(screening.getMovie()))
+                    .times(audienceCount);
+        }
+        return screening.getMovie().getFee().times(audienceCount);
+    }
+
+    private Money calculateDiscountedFee(Movie movie) {
+        switch (movie.getMovieType()) {
+            case AMOUNT_DISCOUNT:
+                return calculateAmountDiscountedFee(movie);
+            case PERCENT_DISCOUNT:
+                return calculatePercentDiscountedFee(movie);
+            case NONE_DISCOUNT:
+                return calculateNoneDiscountedFee(movie);
+        }
+
+        throw new IllegalArgumentException();
+    }
+
+    private Money calculateNoneDiscountedFee(Movie movie) {
+        return Money.ZERO;
+    }
+
+    private Money calculatePercentDiscountedFee(Movie movie) {
+        return movie.getFee().times(movie.getDiscountPercent())
+    }
+
+    private Money calculateAmountDiscountedFee(Movie movie) {
+        return movie.getDiscountAmount();
+    }
+
+    private boolean checkDiscountable(Screening screening) {
+        return screening.getMovie().getDiscountConditions().stream()
+                .anyMatch(condition -> isDiscountable(condition, screening));
+    }
+
+
+
 
 }

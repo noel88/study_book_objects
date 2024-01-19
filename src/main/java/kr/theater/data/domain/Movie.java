@@ -1,12 +1,12 @@
 package kr.theater.data.domain;
 
 
+import kr.theater.data.DiscountCondition;
 import kr.theater.responsibility.domain.Money;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,12 +32,25 @@ public class Movie {
     private String title;
     private Duration runningTime;
     private Money fee;
+//    private List<DiscountCondition> discountConditions;
+//    private List<PeriodCondition> periodConditions;
+//    private List<SequenceCondition> sequenceConditions;
     private List<DiscountCondition> discountConditions;
 
     @Getter
     private MovieType movieType;
     private Money discountAmount;
     private double discountPercent;
+
+    public Movie(String title,
+                 Duration runningTime,
+                 Money fee,
+                 DiscountCondition... discountConditions) {
+        this.title = title;
+        this.runningTime = runningTime;
+        this.fee = fee;
+        this.discountConditions = Arrays.asList(discountConditions);
+    }
 
     /**
      *
@@ -50,39 +63,96 @@ public class Movie {
      */
 
 
-    public Money calculateAmountDiscountedFee() {
-        if (this.movieType != MovieType.AMOUNT_DISCOUNT) {
-            throw new IllegalArgumentException();
+//    public Money calculateAmountDiscountedFee() {
+//        if (this.movieType != MovieType.AMOUNT_DISCOUNT) {
+//            throw new IllegalArgumentException();
+//        }
+//        return this.fee.minus(this.discountAmount);
+//    }
+//
+//    public Money calculatePercentDiscountedFee() {
+//        if (this.movieType != MovieType.PERCENT_DISCOUNT) {
+//            throw new IllegalArgumentException();
+//        }
+//        return this.fee.minus(fee.times(this.discountPercent));
+//    }
+//
+//    public Money calculateNoneDiscountedFee() {
+//        if (this.movieType != MovieType.NONE_DISCOUNT) {
+//            throw new IllegalArgumentException();
+//        }
+//        return this.fee;
+//    }
+
+//    public boolean isDiscountable(LocalDateTime whenScreened, int sequence) {
+//        for (DiscountCondition condition : discountConditions) {
+//            if (condition.getType() == DiscountConditionType.PERIOD) {
+//                if (condition.isDiscountable(whenScreened.getDayOfWeek(), whenScreened.toLocalTime())) {
+//                    return true;
+//                }
+//            } else {
+//                if (condition.isDiscountable(sequence)) {
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
+
+
+
+        public Money calculateMovieFee(Screening screening) {
+        if(isDiscountable(screening)) {
+            return fee.minus(calculateDiscountAmount());
         }
-        return this.fee.minus(this.discountAmount);
+        return fee;
     }
 
-    public Money calculatePercentDiscountedFee() {
-        if (this.movieType != MovieType.PERCENT_DISCOUNT) {
-            throw new IllegalArgumentException();
-        }
-        return this.fee.minus(fee.times(this.discountPercent));
+//    private boolean isDiscountable(Screening screening) {
+//        return discountConditions.stream().anyMatch(condition -> condition.isSatisfiedBy(screening));
+//    }
+
+    //TODO: 첫번째 방법은 클래스 안에서 SequenceCondition의 목록과 PeriodCondition의 목록을 따로 유지.
+//    private boolean isDiscountable(Screening screening) {
+//        return checkPeriodConditions(screening) || checkSequenceConditions(screening);
+//    }
+//
+//    private boolean checkSequenceConditions(Screening screening) {
+//        return sequenceConditions.stream().anyMatch(condition -> condition.isSatisfiedBy(screening));
+//    }
+//
+//    private boolean checkPeriodConditions(Screening screening) {
+//            return periodConditions.stream().anyMatch(condition -> condition.isSatisfiedBy(screening));
+//    }
+
+    private boolean isDiscountable(Screening screening) {
+            return discountConditions.stream().anyMatch(condition -> condition.isSatisfiedBy(screening));
     }
 
-    public Money calculateNoneDiscountedFee() {
-        if (this.movieType != MovieType.NONE_DISCOUNT) {
-            throw new IllegalArgumentException();
-        }
-        return this.fee;
-    }
 
-    public boolean isDiscountable(LocalDateTime whenScreened, int sequence) {
-        for (DiscountCondition condition : discountConditions) {
-            if (condition.getType() == DiscountConditionType.PERIOD) {
-                if (condition.isDiscountable(whenScreened.getDayOfWeek(), whenScreened.toLocalTime())) {
-                    return true;
-                }
-            } else {
-                if (condition.isDiscountable(sequence)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+//    private Money calculateDiscountAmount() {
+//        switch (movieType) {
+//            case AMOUNT_DISCOUNT:
+//                return calculateAmountDiscountedFee();
+//            case PERCENT_DISCOUNT:
+//                return calculatePercentDiscountedFee();
+//            case NONE_DISCOUNT:
+//                return calculateNoneDiscountedFee();
+//        }
+//        throw new IllegalStateException();
+//    }
+//
+//    private Money calculateNoneDiscountedFee() {
+//        return Money.ZERO;
+//    }
+//
+//    private Money calculatePercentDiscountedFee() {
+//        return fee.times(discountPercent);
+//    }
+//
+//    private Money calculateAmountDiscountedFee() {
+//        return discountAmount;
+//    }
+
+    abstract protected Money calculateDiscountAmount();
 }
