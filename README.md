@@ -6,7 +6,7 @@
 - [x] Chapter 03: 역할, 책임, 협력
 - [x] Chapter 04: 설계 품질과 트레이드 오프
 - [x] Chapter 05: 책임 할당하기
-- [ ] Chapter 06: 메세지와 인터페이스
+- [x] Chapter 06: 메세지와 인터페이스
 - [ ] Chapter 07: 객체 분해
 - [ ] Chapter 08: 의존성 관리하기
 - [ ] Chapter 09: 유연한 설계
