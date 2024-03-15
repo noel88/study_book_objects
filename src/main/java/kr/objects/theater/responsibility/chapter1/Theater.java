@@ -1,4 +1,4 @@
-package kr.theater.responsibility.chapter1;
+package kr.objects.theater.responsibility.chapter1;
 
 import lombok.AllArgsConstructor;
 

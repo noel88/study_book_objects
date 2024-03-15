@@ -1,4 +1,6 @@
-package kr.theater.responsibility.domain;
+package kr.objects.theater.responsibility.domain;
+
+import kr.objects.theater.data.domain.Customer;
 
 public class Reservation {
     private Customer customer;

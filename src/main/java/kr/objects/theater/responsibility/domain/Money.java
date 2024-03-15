@@ -1,4 +1,4 @@
-package kr.theater.responsibility.domain;
+package kr.objects.theater.responsibility.domain;
 
 import java.math.BigDecimal;
 

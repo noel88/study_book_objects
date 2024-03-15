@@ -1,8 +1,8 @@
-package kr.theater.data.domain;
+package kr.objects.theater.data.domain;
 
 
-import kr.theater.data.DiscountCondition;
-import kr.theater.responsibility.domain.Money;
+
+import kr.objects.theater.responsibility.domain.Money;
 import lombok.Getter;
 
 import java.time.Duration;

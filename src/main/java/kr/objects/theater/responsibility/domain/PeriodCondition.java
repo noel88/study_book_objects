@@ -1,4 +1,4 @@
-package kr.theater.responsibility.domain;
+package kr.objects.theater.responsibility.domain;
 
 import kr.theater.responsibility.DiscountCondition;
 import kr.theater.responsibility.domain.Screening;

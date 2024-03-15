@@ -1,7 +1,7 @@
-package kr.theater.data;
+package kr.objects.theater.data;
 
-import kr.theater.data.domain.Movie;
-import kr.theater.responsibility.domain.Money;
+
+import kr.objects.theater.responsibility.domain.Money;
 
 import java.time.Duration;
 

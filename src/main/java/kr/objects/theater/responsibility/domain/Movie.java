@@ -1,7 +1,7 @@
-package kr.theater.responsibility.domain;
+package kr.objects.theater.responsibility.domain;
 
-import kr.theater.responsibility.DefaultDiscountPolicy;
-import kr.theater.responsibility.DiscountPolicy;
+import kr.objects.theater.responsibility.DefaultDiscountPolicy;
+import kr.objects.theater.responsibility.DiscountPolicy;
 
 import java.time.Duration;
 

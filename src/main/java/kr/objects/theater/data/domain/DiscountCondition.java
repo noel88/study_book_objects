@@ -1,7 +1,6 @@
-package kr.theater.data.domain;
+package kr.objects.theater.data.domain;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;

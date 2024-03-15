@@ -1,4 +1,4 @@
-package kr.theater.data.domain;
+package kr.objects.theater.data.domain;
 
 import lombok.AllArgsConstructor;
 

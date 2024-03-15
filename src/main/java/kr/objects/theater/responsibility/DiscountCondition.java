@@ -1,6 +1,7 @@
-package kr.theater.responsibility;
+package kr.objects.theater.responsibility;
 
-import kr.theater.responsibility.domain.Screening;
+
+import kr.objects.theater.responsibility.domain.Screening;
 
 public interface  DiscountCondition {
 

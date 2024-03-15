@@ -1,7 +1,7 @@
-package kr.theater.data.type;
+package kr.objects.theater.data.type;
 
-import kr.theater.data.DiscountCondition;
-import kr.theater.data.domain.Screening;
+import kr.objects.theater.data.DiscountCondition;
+import kr.objects.theater.data.domain.Screening;
 import lombok.AllArgsConstructor;
 
 import java.time.DayOfWeek;

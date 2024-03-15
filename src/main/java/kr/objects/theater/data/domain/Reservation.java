@@ -1,6 +1,7 @@
-package kr.theater.data.domain;
+package kr.objects.theater.data.domain;
 
-import kr.theater.responsibility.domain.Money;
+
+import kr.objects.theater.responsibility.domain.Money;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

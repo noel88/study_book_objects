@@ -1,7 +1,7 @@
-package kr.theater.responsibility.domain;
+package kr.objects.theater.responsibility.domain;
 
-import kr.theater.responsibility.DefaultDiscountPolicy;
-import kr.theater.responsibility.DiscountCondition;
+import kr.objects.theater.responsibility.DefaultDiscountPolicy;
+import kr.objects.theater.responsibility.DiscountCondition;
 
 public class PercentDiscountPolicy extends DefaultDiscountPolicy {
 

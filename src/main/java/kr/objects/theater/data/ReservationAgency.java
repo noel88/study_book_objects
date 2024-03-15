@@ -1,9 +1,11 @@
-package kr.theater.data;
+package kr.objects.theater.data;
 
-import kr.theater.data.domain.*;
-import kr.theater.data.domain.DiscountCondition;
-import kr.theater.data.domain.Movie;
-import kr.theater.responsibility.domain.Money;
+import kr.objects.theater.data.domain.Customer;
+import kr.objects.theater.data.domain.Reservation;
+import kr.objects.theater.data.domain.Screening;
+import kr.objects.theater.responsibility.domain.Money;
+
+import static kr.objects.theater.data.domain.MovieType.*;
 
 /**
  * NOTE: ReservationAgency를 수정해야 할 경우

@@ -1,4 +1,4 @@
-package kr.theater.data.domain;
+package kr.objects.theater.data.domain;
 
 public enum DiscountConditionType {
     SEQUENCE, // 순번 조건
